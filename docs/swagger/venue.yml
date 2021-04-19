@@ -1,0 +1,211 @@
+paths:
+  /api/v1/venues:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Venue
+      summary: Get all venue data
+      responses:
+        200:
+          description: OK
+        401:
+          description: Unauthorized
+
+    post:
+      tags:
+        - Venue
+      summary: Create New Venue
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: 'Venue Example'
+                  required: true
+                phone:
+                  type: string
+                  example: '99112233'
+                  required: true
+                address:
+                  type: string
+                  example: 'Jln Muda Dua'
+                  required: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Success
+        422:
+          description: Failed
+        401:
+          description: Unauthorized
+
+  /api/v1/venues/{id}:
+    get:
+      tags:
+        - Venue
+      summary: show venue detail by 'id'
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The Venue ID
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Success
+        401:
+          description: Unauthorized
+
+    put:
+      tags:
+        - Venue
+      summary: Update venue by 'id'
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The Venue ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: 'Venue Example'
+                  required: true
+                phone:
+                  type: string
+                  example: '99112233'
+                  required: true
+                address:
+                  type: string
+                  example: 'Jln Muda Dua'
+                  required: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Success
+        422:
+          description: Failed
+        401:
+          description: Unauthorized
+
+    delete:
+      tags:
+        - Venue
+      summary: Delete venue by 'id'
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The Venue ID
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Success
+        401:
+          description: Unauthorized
+
+  /api/v1/venues/{id}/fields:
+    post:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The Venue ID
+      tags:
+        - Venue
+      summary: Create New Field
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: 'Field Example'
+                  required: true
+                type:
+                  type: string
+                  enum: [soccer, minisoccer, volleyball, futsal, basketball, volleyball]
+                  required: true
+
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Success
+        422:
+          description: Failed
+        401:
+          description: Unauthorized
+
+  /api/v1/fields/{id}/bookings:
+    post:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The Field ID
+      tags:
+        - Field
+      summary: Create New Schedule To Book
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                play_date_start:
+                  type: string
+                  example: '2021-04-18T13:00:00.000+07:00'
+                  required: true
+                  description: 'Format ISO 8601'
+                play_date_end:
+                  type: string
+                  example: '2021-04-18T15:00:00.000+07:00'
+                  required: false
+                  description: 'Format ISO 8601'
+
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Success
+        422:
+          description: Failed
+        401:
+          description: Unauthorized

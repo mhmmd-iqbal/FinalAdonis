@@ -1,0 +1,88 @@
+paths:
+  /api/v1/login:
+    post:
+      tags:
+        - Authenticated
+      summary: Login User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: 'test@example.com'
+                  required: true
+                password:
+                  type: string
+                  example: '12345'
+                  required: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Success
+        422:
+          description: Failed
+
+  /api/v1/otp-confirmation:
+    post:
+      tags:
+        - Authenticated
+      summary: Verifikasi OTP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                otp:
+                  type: string
+                  example: '123ab'
+                  required: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Success
+        422:
+          description: Failed
+
+  /api/v1/register:
+    post:
+      tags:
+        - Authenticated
+      summary: Create New User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: 'John Doe'
+                  required: true
+                email:
+                  type: email
+                  example: 'test@example.com'
+                  required: true
+                password:
+                  type: string
+                  example: '12345'
+                  required: true
+                role:
+                  type: string
+                  enum: [user, owner]
+                  required: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Success
+        422:
+          description: Failed

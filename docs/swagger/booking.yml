@@ -1,0 +1,86 @@
+paths:
+  /api/v1/bookings:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Booking
+      summary: Get all bookings data
+      responses:
+        200:
+          description: OK
+        401:
+          description: Unauthorized
+
+  /api/v1/bookings/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The Booking ID
+      security:
+        - bearerAuth: []
+      tags:
+        - Booking
+      summary: Get detail booking information
+      responses:
+        200:
+          description: OK
+        401:
+          description: Unauthorized
+
+  /api/v1/bookings/{id}/join:
+    put:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The Booking ID
+      security:
+        - bearerAuth: []
+      tags:
+        - Booking
+      summary: Join book
+      responses:
+        200:
+          description: OK
+        401:
+          description: Unauthorized
+
+  /api/v1/bookings/{id}/unjoin:
+    put:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: The Booking ID
+      security:
+        - bearerAuth: []
+      tags:
+        - Booking
+      summary: Unjoin book
+      responses:
+        200:
+          description: OK
+        401:
+          description: Unauthorized
+
+  /api/v1/schedules:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Booking
+      summary: Show all schedule of user
+      responses:
+        200:
+          description: OK
+        401:
+          description: Unauthorized
